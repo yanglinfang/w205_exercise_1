@@ -1,7 +1,5 @@
-#------------------------------------------
-#ex1 scripts, part 3, after starting hive
-#------------------------------------------
-CREATE TABLE Hospital
+DROP TABLE [IF EXISTS] Hospital;
+CREATE EXTERNAL TABLE Hospital
 ( 
 ProviderID varchar(10),
 HospitalName varchar(100),
@@ -15,14 +13,20 @@ HospitalType varchar(50),
 HospitalOwnership varchar(50),
 EmergencyServices varchar(100)
 )
-row format delimited
-fields terminated by '\t'
-stored as textfile;
+row format SERDE 'org.apache.hadoop.hive.serde2.OpenCSVSerde'
+WITH SERDEPROPERTIES (
+'separatorChar' = ',',
+'quoteChar' = '"',
+'escapeChar' = '\\'
+)
+stored as textfile
+location '/user/lin/hdfs';
 
 LOAD DATA LOCAL INPATH '/user/lin/hospital_compare/dataForEx1/hospital_noheader.csv'
 OVERWRITE INTO TABLE Hospital;
 
-CREATE TABLE EffectiveCare
+DROP TABLE [IF EXISTS] EffectiveCare;
+CREATE EXTERNAL TABLE EffectiveCare
 ( 
 ProviderID varchar(10),
 HospitalName varchar(100),
@@ -41,14 +45,20 @@ Footnote varchar(200),
 MeasureStartDate varchar(20),
 MeasureEndDate varchar(10)
 )
-row format delimited
-fields terminated by '\t'
-stored as textfile;
+row format SERDE 'org.apache.hadoop.hive.serde2.OpenCSVSerde'
+WITH SERDEPROPERTIES (
+'separatorChar' = ',',
+'quoteChar' = '"',
+'escapeChar' = '\\'
+)
+stored as textfile
+location '/user/lin/hdfs';
 
 LOAD DATA LOCAL INPATH '/user/lin/hospital_compare/dataForEx1/effective_care_noheader.csv'
 OVERWRITE INTO TABLE EffectiveCare;
 
-CREATE TABLE SurveysResponses
+DROP TABLE [IF EXISTS] SurveysResponses;
+CREATE EXTERNAL TABLE SurveysResponses
 (
 ProviderID varchar(10),
 HospitalName varchar(100),
@@ -84,9 +94,14 @@ OverallRatingofHospitalDimensionScore varchar(30),
 HCAHPSBaseScore varchar(30),
 HCAHPSConsistencyScore varchar(30)
 )
-row format delimited
-fields terminated by '\t'
-stored as textfile;
+row format SERDE 'org.apache.hadoop.hive.serde2.OpenCSVSerde'
+WITH SERDEPROPERTIES (
+'separatorChar' = ',',
+'quoteChar' = '"',
+'escapeChar' = '\\'
+)
+stored as textfile
+location '/user/lin/hdfs';
 
 LOAD DATA LOCAL INPATH '/user/lin/hospital_compare/dataForEx1/surveys_responses_noheader.csv'
 OVERWRITE INTO TABLE SurveysResponses;
