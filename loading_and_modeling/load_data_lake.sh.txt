@@ -1,6 +1,6 @@
-------------------------------------------
-ex1 scripts, part 1, before starting hive
-------------------------------------------
+#------------------------------------------
+#ex1 scripts, part 1, before starting hive
+#------------------------------------------
 wget https://data.medicare.gov/views/bg9k-emty/files/Nqcy71p9Ss2RSBWDmP77H1DQXcyacr2khotGbDHHW_s?content_type=application%2Fzip%3B%20charset%3Dbinary&filename=Hospital_Revised_Flatfiles.zip
 mv "Nqcy71p9Ss2RSBWDmP77H1DQXcyacr2khotGbDHHW_s?content_type=application%2Fzip; charset=binary" "dataForEx1.zip"
 unzip dataForEx1.zip "*.*" Makefile -d /user/lin/hospital_compare/dataForEx1
@@ -21,9 +21,9 @@ tail -n +2 surveys_responses.csv > surveys_responses_noheader.csv
 rename "Measure Dates.csv" "measure_dates.csv" "Measure Dates.csv"
 tail -n +2 measure_dates.csv > measure_dates_noheader.csv
 
-------------------------------------------
-ex1 scripts, part 2, after starting hive
-------------------------------------------
+#------------------------------------------
+#ex1 scripts, part 2, after starting hive
+#------------------------------------------
 hive
 CREATE TABLE Hospital
 ( 
@@ -115,9 +115,9 @@ stored as textfile;
 LOAD DATA LOCAL INPATH '/user/lin/hospital_compare/dataForEx1/surveys_responses_noheader.csv'
 OVERWRITE INTO TABLE SurveysResponses;
 
-------------------------------------------
-ex1 scripts, part 3, after starting pyspark
-------------------------------------------
+#------------------------------------------
+#ex1 scripts, part 3, after starting pyspark
+#------------------------------------------
 pyspark
 from pyspark.sql import SQLContext
 from pyspark.sql.types import *
