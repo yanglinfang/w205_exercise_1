@@ -1,0 +1,13 @@
+If only consider hospital that has more than one survey score (score variance > 0), we have
+HospitalName	SumScore	AvgScore	VarianceScore
+AURORA MEDICAL CENTER   17      8.5     0.25
+ST JOSEPHS HOSPITAL     23      7.666666666666667       2.888888888888889
+ST JOSEPH HOSPITAL      19      6.333333333333333       2.888888888888889
+ST LUKES HOSPITAL       19      6.333333333333333       8.222222222222223
+CITIZENS MEDICAL CENTER 12      6.0     16.0
+COMMUNITY HOSPITAL      12      6.0     1.0
+SAINT FRANCIS MEDICAL CENTER    12      6.0     1.0
+YORK HOSPITAL   12      6.0     16.0
+ST MARYS HOSPITAL       23      5.75    3.6875
+ST ANTHONY HOSPITAL     11      5.5     6.25
+Time taken: 2.898 seconds, Fetched: 10 row(s)
