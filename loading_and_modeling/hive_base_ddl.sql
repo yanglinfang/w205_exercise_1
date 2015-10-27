@@ -57,7 +57,7 @@ location '/user/lin/hdfs';
 LOAD DATA LOCAL INPATH '/user/lin/hospital_compare/dataForEx1/effective_care_noheader.csv'
 OVERWRITE INTO TABLE EffectiveCare;
 
-DROP TABLE [IF EXISTS] SurveysResponses;
+DROP TABLE SurveysResponses;
 CREATE EXTERNAL TABLE SurveysResponses
 (
 ProviderID varchar(10),
