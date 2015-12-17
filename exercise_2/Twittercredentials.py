@@ -1,16 +1,16 @@
-import tweepy
+﻿import tweepy
 
-consumer_key = "YourConsumerkey";
+consumer_key = "tdFtNB2QVd7kbvOdEFNzfqJYr";
 #eg: consumer_key = "YisfFjiodKtojtUvW4MSEcPm";
 
 
-consumer_secret = "YourConsumerSecret";
+consumer_secret = "ibB8LicfiMMhPhEJhdnON4I2rou3SoAwgg7lcliMZxDqV6yKop";
 #eg: consumer_secret = "YisfFjiodKtojtUvW4MSEcPmYisfFjiodKtojtUvW4MSEcPmYisfFjiodKtojtUvW4MSEcPm";
 
-access_token = "YourAcessToken";
+access_token = "496315468-Z2cO1GPvrb3BAGYdz94tBtQ55jPP8RcxCQkn9iti";
 #eg: access_token = "YisfFjiodKtojtUvW4MSEcPmYisfFjiodKtojtUvW4MSEcPmYisfFjiodKtojtUvW4MSEcPm";
 
-access_token_secret = "YourTokenSecret";
+access_token_secret = "dpgwQ35BkBZBsJyU571C2WszJnDrxMrvWZ9AtyKiVU3jd";
 #eg: access_token_secret = "YisfFjiodKtojtUvW4MSEcPmYisfFjiodKtojtUvW4MSEcPmYisfFjiodKtojtUvW4MSEcPm";
 
 
