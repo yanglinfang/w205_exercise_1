@@ -12,12 +12,12 @@ conn = psycopg2.connect(database="postgres", user="postgres", password="pass", h
 #Create a Table
 #The first step is to create a cursor. 
 
-cur = conn.cursor()
-cur.execute('''DROP TABLE Tweetwordcount;''')
-cur.execute('''CREATE TABLE Tweetwordcount
-       (word TEXT PRIMARY KEY     NOT NULL,
-       count INT     NOT NULL);''')
-conn.commit()
+#cur = conn.cursor()
+#cur.execute('''DROP TABLE Tweetwordcount;''')
+#cur.execute('''CREATE TABLE Tweetwordcount
+#       (word TEXT PRIMARY KEY     NOT NULL,
+#       count INT     NOT NULL);''')
+#conn.commit()
 #conn.close()
 
 
@@ -31,20 +31,32 @@ conn.commit()
 cur = conn.cursor()
 
 #Insert
-cur.execute("INSERT INTO Tweetwordcount (word,count) \
-      VALUES ('test', 1)");
-conn.commit()
+#cur.execute("INSERT INTO Tweetwordcount (word,count) VALUES ('test', 1)");
+#conn.commit()
 
 #Update
 #Assuming you are passing the tuple (uWord, uCount) as an argument
-uWord = 'word'
-uCount = '1'
-cur.execute("UPDATE Tweetwordcount SET count=%s WHERE word=%s", (uCount, uWord))
-conn.commit()
+uWord = 'test2'
+uCount = '2'
 
-#Select
-cur.execute("SELECT word, count from Tweetwordcount")
+cur.execute("SELECT word, count from Tweetwordcount WHERE word=%s",[uWord]);
 records = cur.fetchall()
+if len(records) > 0:
+	print "found", len(records), "records, before update:"
+	for rec in records:
+		print "word = ", rec[0]
+		print "count = ", rec[1], "\n"
+	cur.execute("UPDATE Tweetwordcount SET count=%s WHERE word=%s", (uCount, uWord));
+	conn.commit()
+else:
+	print 'record does not exist, try insert'
+	cur.execute("INSERT INTO Tweetwordcount (word,count) VALUES (%s, %s)", (uWord, uCount));
+	conn.commit()
+	
+#Select
+cur.execute("SELECT word, count from Tweetwordcount WHERE word=%s",[uWord]);
+records = cur.fetchall()
+print "found", len(records), "records, after update:"
 for rec in records:
    print "word = ", rec[0]
    print "count = ", rec[1], "\n"
