@@ -20,37 +20,36 @@ class WordCounter(Bolt):
         # Database name: postgres 
         # Table name: Tweetwordcount 
         # you need to create both the database and the table in advance.
-        
-		#cur = self.conn.cursor()
+        cur = self.conn.cursor()
 
-		# uWord = word
-		# uCount = self.counts[word]] + 1
+        uWord = word
+        uCount = self.counts[word] + 1
 
-		# cur.execute("SELECT word, count from Tweetwordcount WHERE word=%s",[uWord]);
-		# records = cur.fetchall()
-		# #update or insert
-		# if len(records) > 0:
-			# print "found", len(records), "records, before update:"
-			# for rec in records:
-				# print "word = ", rec[0]
-				# print "count = ", rec[1], "\n"
-			# cur.execute("UPDATE Tweetwordcount SET count=%s WHERE word=%s", (uCount, uWord));
-			# conn.commit()
-		# else:
-			# print 'record does not exist, try insert'
-			# cur.execute("INSERT INTO Tweetwordcount (word,count) VALUES (%s, %s)", (uWord, uCount));
-			# conn.commit()
+        cur.execute("SELECT word, count from Tweetwordcount WHERE word=%s",[uWord]);
+        records = cur.fetchall()
+        #update or insert
+        if len(records) > 0:
+            self.log('found %s records, before update:' % (len(records)))
+            for rec in records:
+                self.log('word = %s' % (rec[0]))
+                self.log('count = %s' % (rec[1]))
+            cur.execute("UPDATE Tweetwordcount SET count=%s WHERE word=%s", (uCount, uWord));
+            #self.conn.commit()
+        else:
+            self.log('record does not exist, try insert')
+            cur.execute("INSERT INTO Tweetwordcount (word,count) VALUES (%s, %s)", (uWord, uCount));
+            #self.conn.commit()
 			
-		# #Select
-		# cur.execute("SELECT word, count from Tweetwordcount WHERE word=%s",[uWord]);
-		# records = cur.fetchall()
-		# print "found", len(records), "records, after update:"
-		# for rec in records:
-		   # print "word = ", rec[0]
-		   # print "count = ", rec[1], "\n"
-		# conn.commit()
+        #Select
+        cur.execute("SELECT word, count from Tweetwordcount WHERE word=%s",[uWord]);
+        records = cur.fetchall()
+        self.log('found %s records, after update:' % (len(records)))
+        for rec in records:
+            self.log('word = %s' % (rec[0]))
+            self.log('count = %s' % (rec[1]))
+        #self.conn.commit()
 
-		# conn.close()
+        #self.conn.close()
 
         # Increment the local count
         self.counts[word] += 1
