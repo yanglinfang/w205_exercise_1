@@ -6,6 +6,7 @@
 
 
 import psycopg2
+import sys
 
 conn = psycopg2.connect(database="postgres", user="postgres", password="pass", host="localhost", port="5432")
 
@@ -36,27 +37,37 @@ cur = conn.cursor()
 
 #Update
 #Assuming you are passing the tuple (uWord, uCount) as an argument
+
 uWord = 'test2'
 uCount = '2'
 
-cur.execute("SELECT word, count from Tweetwordcount WHERE word=%s",[uWord]);
-records = cur.fetchall()
-if len(records) > 0:
-	print "found", len(records), "records, before update:"
-	for rec in records:
-		print "word = ", rec[0]
-		print "count = ", rec[1], "\n"
-	cur.execute("UPDATE Tweetwordcount SET count=%s WHERE word=%s", (uCount, uWord));
-	conn.commit()
-else:
-	print 'record does not exist, try insert'
-	cur.execute("INSERT INTO Tweetwordcount (word,count) VALUES (%s, %s)", (uWord, uCount));
-	conn.commit()
+if sys.argv:
+    print 'there are %s arg:' %(len(sys.argv))
+    for arg in sys.argv: 
+        print arg
+		
+    if len(sys.argv) > 1:
+        print 'using second arg as uWord:', sys.argv[1]
+        uWord = sys.argv[1]
+
+# cur.execute("SELECT word, count from Tweetwordcount WHERE word=%s",[uWord]);
+# records = cur.fetchall()
+# if len(records) > 0:
+	# print "found", len(records), "records, before update:"
+	# for rec in records:
+		# print "word = ", rec[0]
+		# print "count = ", rec[1], "\n"
+	# cur.execute("UPDATE Tweetwordcount SET count=%s WHERE word=%s", (uCount, uWord));
+	# conn.commit()
+# else:
+	# print 'record does not exist, try insert'
+	# cur.execute("INSERT INTO Tweetwordcount (word,count) VALUES (%s, %s)", (uWord, uCount));
+	# conn.commit()
 	
 #Select
 cur.execute("SELECT word, count from Tweetwordcount WHERE word=%s",[uWord]);
 records = cur.fetchall()
-print "found", len(records), "records, after update:"
+print "found", len(records), "records:"
 for rec in records:
    print "word = ", rec[0]
    print "count = ", rec[1], "\n"

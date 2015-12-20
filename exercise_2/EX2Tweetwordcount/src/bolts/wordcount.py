@@ -33,12 +33,12 @@ class WordCounter(Bolt):
             for rec in records:
                 self.log('word = %s' % (rec[0]))
                 self.log('count = %s' % (rec[1]))
-            cur.execute("UPDATE Tweetwordcount SET count=%s WHERE word=%s", (uCount, uWord));
-            
+            cur.execute("UPDATE Tweetwordcount SET count=%s WHERE word=%s", (uCount + rec[1], uWord));
+            self.conn.commit()
         else:
             self.log('record does not exist, try insert')
             cur.execute("INSERT INTO Tweetwordcount (word,count) VALUES (%s, %s)", (uWord, uCount));
-            
+            self.conn.commit()
 			
         #Select
         cur.execute("SELECT word, count from Tweetwordcount WHERE word=%s",[uWord]);
